@@ -15,7 +15,7 @@ int main(int argc, char** argv)
    glutInitDisplayMode (GLUT_DEPTH | GLUT_SINGLE | GLUT_RGB);
    glutInitWindowSize (WINDOW_HEIGHT, WINDOW_WIDTH); 
    glutInitWindowPosition (100, 100);
-   glutCreateWindow ("Light Mixing");
+   glutCreateWindow ("Death Star");
    init ();
    glutDisplayFunc(display); 
    glutReshapeFunc(reshape);
