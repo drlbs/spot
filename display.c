@@ -52,13 +52,17 @@ void display(void)
 
    /* Now add a green spotlight */ 
 
+   /* These properties take a single argument, and they should
+    * be defined first for the spotlight so that parameters for 
+    * the other values are calculated properly */
+
    glLightf(GL_LIGHT2, GL_SPOT_CUTOFF, 3.0);
    glLightf(GL_LIGHT2, GL_SPOT_EXPONENT, 30.0);
    glLightf(GL_LIGHT2, GL_LINEAR_ATTENUATION, 0.0);
 
    /* Spotlight is going to be positioned on the arc of the circle
     * connectint he y-z axis
-    * x=y=0.7071*15=10.61
+    * y=z=0.7071*15=10.61
     */
 
    float *light2 = malloc(4*sizeof(float));
@@ -71,7 +75,8 @@ void display(void)
    glLightfv(GL_LIGHT2, GL_DIFFUSE, light2);
    glLightfv(GL_LIGHT2, GL_SPECULAR, light2);
 
-   /* the direction will be through the axis in the negative y-z plane */
+   /* the direction will be through the axis in the negative y-z plane 
+    * the direction is only a 3-element vector */
    float *direction = malloc(3*sizeof(float));
    direction[0]= 0.0; direction[1] = -1.0; direction[2]=-1.0; ;
    glLightfv(GL_LIGHT2, GL_SPOT_DIRECTION, direction);
@@ -84,10 +89,13 @@ void display(void)
    glEnable(GL_LIGHT2);
    glEnable(GL_LIGHTING);
 
+   /* define the spherical quadric and make sure proper normals are generated 
+    * for lighting */
    earth = gluNewQuadric();
    gluQuadricNormals(earth, GLU_SMOOTH);
    gluSphere( earth, 2.0, 144, 144);
 
+   /* clean up your toys */
    free(earth);
    free(light0);
    free(light1);
